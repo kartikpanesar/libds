@@ -1,5 +1,5 @@
-#ifndef STACK_H
-#define STACK_H
+#ifndef MAP_H 
+#define MAP_H
 
 #include <stddef.h>
 
