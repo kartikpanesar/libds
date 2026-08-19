@@ -4,13 +4,13 @@ A small C data structures library, built from scratch as a systems-programming e
 
 ## What's implemented
 
-| Structure | Header | Type | Status |
+| Structure | Header | Type |
 |---|---|---|---|
-| Dynamic array | `include/dynamic_array.h` | `da` | Working |
-| Doubly linked list | `include/linked_list.h` | `dll` | Working |
-| Stack | `include/stack.h` | `stack` | Working |
-| Queue | `include/queue.h` | `qu` | Working |
-| Hash map (djb2, separate chaining) | `include/map.h` | `map` | Working |
+| Dynamic array | `include/dynamic_array.h` | `da` |
+| Doubly linked list | `include/linked_list.h` | `dll` |
+| Stack | `include/stack.h` | `stack` |
+| Queue | `include/queue.h` | `qu` |
+| Hash map (djb2, separate chaining) | `include/map.h` | `map` |
 
 All containers are generic over element type via `size_t element_size` passed at init time, with values copied by `memcpy` into internally owned memory.
 
