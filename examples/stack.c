@@ -61,6 +61,10 @@ void stack_push(stack *s, const void *value){
     return;
 }
 
+void *stack_peek(stack *s){
+    // returns the top of the stack without poping .
+    return s->top;
+}
 
 void *stack_pop(stack *s){
     void *p = s->top;
