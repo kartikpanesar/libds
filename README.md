@@ -5,7 +5,7 @@ A small C data structures library, built from scratch as a systems-programming e
 ## What's implemented
 
 | Structure | Header | Type |
-|---|---|---|---|
+|---|---|---|
 | Dynamic array | `include/dynamic_array.h` | `da` |
 | Doubly linked list | `include/linked_list.h` | `dll` |
 | Stack | `include/stack.h` | `stack` |
