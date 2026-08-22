@@ -7,7 +7,7 @@
 
 // general type dynamic array 
 
-typedef struct {
+typedef struct dynamic_array{
     void *items;
     size_t element_size;
     size_t count;

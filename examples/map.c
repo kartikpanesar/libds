@@ -158,6 +158,36 @@ void *map_get(map *m, const char* key){
 }
 
 
+void map_set(map *m , const char* key, const void *value, size_t element_size){
+    void *v = malloc(element_size);
+    if(v==0){
+        fprintf(stderr, "Couldn't allocate memory for the value.\n");
+        exit(1);
+    }
+
+    // Copying the bytes.
+    memcpy(v, value, element_size);
+
+    size_t index = hash_function_djb(m, key);
+
+    node *current = m->array[index];
+    while(current!=NULL){
+        if(strcmp(current->key, key)==0){
+            free(current->obj);
+            current->obj = v;
+            return ;
+        }
+        current = current->next;
+    }
+
+    free(v);
+    map_add(m, key, value, element_size);
+
+    return ;
+}
+
+
+
 void map_free(map *m){
     for(int i=0; i<m->capacity; i++){
         node *current = m->array[i];
@@ -182,10 +212,17 @@ int main(void){
     float pi = 3.14;
     int three = 3;
     char *name = "kartik";
+    char *name2 = "ritik";
 
     map_add(m, "pi", &pi, sizeof(float));
     map_add(m, "three", &three, sizeof(int));
     map_add(m, "name", name, strlen(name)+1);
+
+    printf("pi = %f\n", *(float *)map_get(m, "pi"));
+    printf("three = %d\n", *(int *)map_get(m, "three"));
+    printf("name = %s\n", (char *)map_get(m, "name"));
+
+    map_set(m , "name", name2, 6);
 
     printf("pi = %f\n", *(float *)map_get(m, "pi"));
     printf("three = %d\n", *(int *)map_get(m, "three"));

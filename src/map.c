@@ -108,6 +108,8 @@ void map_add(map *m, const char* key, const void *value, size_t element_size){
         fprintf(stderr, "couldn't allocate memory for value\n");
         exit(1);
     }
+
+    // Copying the bytes.
     memcpy(v , value , element_size);
 
     node *new = malloc(sizeof(node));
@@ -156,6 +158,36 @@ void *map_get(map *m, const char* key){
     // meaning no value found for this key .
     return NULL;
 }
+
+
+void map_set(map *m , const char* key, const void *value, size_t element_size){
+    void *v = malloc(element_size);
+    if(v==0){
+        fprintf(stderr, "Couldn't allocate memory for the value.\n");
+        exit(1);
+    }
+
+    // Copying the bytes.
+    memcpy(v, value, element_size);
+
+    size_t index = hash_function_djb(m, key);
+
+    node *current = m->array[index];
+    while(current!=NULL){
+        if(strcmp(current->key, key)==0){
+            free(current->obj);
+            current->obj = v;
+            return ;
+        }
+        current = current->next;
+    }
+
+    free(v);
+    map_add(m, key, value, element_size);
+
+    return ;
+}
+
 
 
 void map_free(map *m){
